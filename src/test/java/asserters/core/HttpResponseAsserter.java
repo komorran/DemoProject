@@ -2,27 +2,41 @@ package asserters.core;
 
 import io.qameta.allure.Step;
 import models.infrastructure.headers.Header;
-import okhttp3.Headers;
 import retrofit2.Response;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HttpResponseAsserter {
+public class HttpResponseAsserter<T extends HttpResponseAsserter<T, R>, R> {
+
+    protected Response<R> response;
+
+    public T useResponse(Response<R> response) {
+        this.response = response;
+        return (T) this;
+    }
+
+    public Response<R> getResponse() {
+        return response;
+    }
+
     @Step("Assert that status code is successful")
-    public static void assertSuccessful(Response<?> response) {
-        assertTrue(response.isSuccessful(), "Response wasn't successful");
+    public T assertSuccessful() {
+        assertTrue(this.response.isSuccessful(), "Response wasn't successful");
+        return (T) this;
     }
 
     @Step("Assert that response body is not null")
-    public static <T> void assertResponseBodyIsNotNull(Response<T> response) {
-        assertNotNull(response.body());
+    public T assertResponseBodyIsNotNull() {
+        assertNotNull(this.response.body());
+        return (T) this;
     }
 
     @Step("Assert that response headers contain specific header")
-    public static void assertHeadersContain(Headers actual, Header expected) {
-        var actualHeader = actual.get(expected.getName());
+    public T assertHeadersContain(Header expected) {
+        var actualHeader = response.headers().get(expected.getName());
         assertEquals(actualHeader, expected.getValue());
+        return (T) this;
     }
 }

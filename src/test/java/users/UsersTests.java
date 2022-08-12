@@ -9,9 +9,6 @@ import users.modules.UsersTestsModule;
 
 import java.io.IOException;
 
-import static asserters.core.HttpResponseAsserter.*;
-import static asserters.users.UserAsserter.*;
-
 
 public class UsersTests extends AbstractTest<UsersTestsModule, UsersTestsSteps> {
     @Override
@@ -22,17 +19,19 @@ public class UsersTests extends AbstractTest<UsersTestsModule, UsersTestsSteps> 
     @Test
     public void postUserTest() throws IOException {
         var user = UsersFactory.getUser();
-        var postResponse = testSteps.postUser(user);
 
-        assertSuccessful(postResponse);
-        assertResponseBodyIsNotNull(postResponse);
-        assertUser(user, postResponse.body());
-        assertHeadersContain(postResponse.headers(), Header.create(HeaderNames.CONTENT_TYPE, "application/json; charset=utf-8"));
+        var postResponse = testSteps.postUser(user)
+                .assertSuccessful()
+                .assertResponseBodyIsNotNull()
+                .assertHeadersContain(Header.create(HeaderNames.CONTENT_TYPE, "application/json; charset=utf-8"))
+                .assertUser(user)
+                .getResponse();
 
-        var getResponse = testSteps.getUserById(postResponse.body().getId());
-        assertSuccessful(getResponse);
-        assertResponseBodyIsNotNull(getResponse);
-        assertUser(user, getResponse.body());
-        assertHeadersContain(getResponse.headers(), Header.create(HeaderNames.CONTENT_TYPE, "application/json; charset=utf-8"));
+        var getResponse = testSteps.getUserById(postResponse.body().getId())
+                .assertSuccessful()
+                .assertResponseBodyIsNotNull()
+                .assertHeadersContain(Header.create(HeaderNames.CONTENT_TYPE, "application/json; charset=utf-8"))
+                .assertUser(user)
+                .getResponse();
     }
 }

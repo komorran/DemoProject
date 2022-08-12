@@ -23,7 +23,7 @@ public abstract class AbstractTest<T extends AbstractTestModule, M extends Abstr
     }
 
     @BeforeEach
-    void setup() {
+    public void setup() {
         Guice.createInjector(testModule)
                 .injectMembers(this);
     }

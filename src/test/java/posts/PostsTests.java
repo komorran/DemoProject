@@ -1,31 +1,47 @@
 package posts;
 
 import abstractions.AbstractTest;
-import models.infrastructure.headers.Header;
-import models.infrastructure.headers.HeaderNames;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import posts.modules.PostsModule;
+import models.Post;
+import models.factories.UsersFactory;
+import org.junit.jupiter.api.Test;
+import posts.modules.PostsTestsModule;
+import users.UsersTestsSteps;
 
+import javax.inject.Inject;
 import java.io.IOException;
 
-import static asserters.core.HttpResponseAsserter.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+public class PostsTests extends AbstractTest<PostsTestsModule, PostsTestSteps> {
 
-public class PostsTests extends AbstractTest<PostsModule, PostsTestSteps> {
+    @Inject
+    private UsersTestsSteps usersTestsSteps;
+
     @Override
-    protected PostsModule getModule() {
-        return new PostsModule();
+    protected PostsTestsModule getModule() {
+        return new PostsTestsModule();
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {1642})
-    public void getPostTest(int id) throws IOException {
-        var result = testSteps.getPostById(id);
+    @Test
+    public void createPostTest() throws IOException {
+        var user = usersTestsSteps.postUser(UsersFactory.getUser())
+                .getResponse()
+                .body();
 
-        assertSuccessful(result);
-        assertResponseBodyIsNotNull(result);
-        assertEquals(3562, result.body().getUserId());
-        assertHeadersContain(result.headers(), Header.create(HeaderNames.CONTENT_TYPE, "application/json; charset=utf-8"));
+        var post = Post.builder()
+                .userId(user.getId())
+                .title("qweqweqwe")
+                .body("qqqqqqqqqq")
+                .build();
+
+        var postResponse = testSteps.createPost(post)
+                .assertSuccessful()
+                .assertResponseBodyIsNotNull()
+                .assertPost(post)
+                .getResponse()
+                .body();
+
+        var getResponse = testSteps.getPostById(postResponse.getId())
+                .assertSuccessful()
+                .assertResponseBodyIsNotNull()
+                .assertPost(post);
     }
 }
