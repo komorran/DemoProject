@@ -17,4 +17,4 @@ jobs:
       run: docker-compose -f ./ci/docker-compose.yml build
 
     - name: Run tests
-     run: docker-compose-run test
+      run: docker-compose-run test
