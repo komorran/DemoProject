@@ -20,13 +20,13 @@ public class PostsTestContext extends AbstractTestContext {
         this.postsAsserterBuilder = postsAsserterBuilder;
     }
 
-    @Step("Get a post by ID: {id}")
+    @Step("Get the post by ID: {id}")
     public PostsAsserter getPostById(int id) throws IOException {
         var response = postsService.getPost(id).execute();
         return buildAsserter(response);
     }
 
-    @Step("Create a post")
+    @Step("Create the post")
     public PostsAsserter createPost(Post post) throws IOException {
         var response = postsService.createPost(post).execute();
         return buildAsserter(response);

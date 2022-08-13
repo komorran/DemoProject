@@ -14,7 +14,7 @@ public class PostsAsserter extends HttpResponseAsserter<PostsAsserter, Post> {
         super(response);
     }
 
-    @Step("Assert a post")
+    @Step("Assert the post")
     public PostsAsserter assertPost(Post expected) {
         var post = getResponseBody();
 

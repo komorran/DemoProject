@@ -10,6 +10,8 @@ import users.modules.UsersTestModule;
 import javax.inject.Inject;
 import java.io.IOException;
 
+import static io.qameta.allure.Allure.step;
+
 
 public class UsersTests extends AbstractTest<UsersTestModule> {
 
@@ -22,21 +24,21 @@ public class UsersTests extends AbstractTest<UsersTestModule> {
     }
 
     @Test
-    public void postUserTest() throws IOException {
+    public void postUserTest() {
         var user = UsersFactory.getUser();
 
-        var postResponse = usersTestsContext.postUser(user)
+        var postResponse = step("Create an user", () -> usersTestsContext.postUser(user)
                 .assertSuccessful()
                 .assertResponseBodyIsNotNull()
                 .assertHeadersContain(Header.create(HeaderNames.CONTENT_TYPE, "application/json; charset=utf-8"))
                 .assertUser(user)
-                .getResponseBody();
+                .getResponseBody());
 
-        var getResponse = usersTestsContext.getUserById(postResponse.getId())
+        var getResponse = step("Get an user", () -> usersTestsContext.getUserById(postResponse.getId())
                 .assertSuccessful()
                 .assertResponseBodyIsNotNull()
                 .assertHeadersContain(Header.create(HeaderNames.CONTENT_TYPE, "application/json; charset=utf-8"))
                 .assertUser(user)
-                .getResponseBody();
+                .getResponseBody());
     }
 }

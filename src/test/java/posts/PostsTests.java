@@ -1,7 +1,7 @@
 package posts;
 
 import abstractions.AbstractTest;
-import models.Post;
+import models.factories.PostsFactory;
 import models.factories.UsersFactory;
 import org.junit.jupiter.api.Test;
 import posts.modules.PostsTestModule;
@@ -9,6 +9,8 @@ import users.UsersTestsContext;
 
 import javax.inject.Inject;
 import java.io.IOException;
+
+import static io.qameta.allure.Allure.step;
 
 public class PostsTests extends AbstractTest<PostsTestModule> {
 
@@ -24,26 +26,21 @@ public class PostsTests extends AbstractTest<PostsTestModule> {
     }
 
     @Test
-    public void createPostTest() throws IOException {
-        var user = usersTestsContext.postUser(UsersFactory.getUser())
-                .getResponse()
-                .body();
+    public void createPostTest() {
+        var user = step("Precondition: Create an user", () -> usersTestsContext.postUser(UsersFactory.getUser())
+                .getResponseBody());
 
-        var post = Post.builder()
-                .userId(user.getId())
-                .title("qweqweqwe")
-                .body("qqqqqqqqqq")
-                .build();
+        var post = PostsFactory.getPost(user.getId());
 
-        var postResponse = postsTestContext.createPost(post)
+        var postResponse = step("Create the post", () -> postsTestContext.createPost(post)
                 .assertSuccessful()
                 .assertResponseBodyIsNotNull()
                 .assertPost(post)
-                .getResponseBody();
+                .getResponseBody());
 
-        var getResponse = postsTestContext.getPostById(postResponse.getId())
+        var getResponse = step("Get the post", () -> postsTestContext.getPostById(postResponse.getId())
                 .assertSuccessful()
                 .assertResponseBodyIsNotNull()
-                .assertPost(post);
+                .assertPost(post));
     }
 }
