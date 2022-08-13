@@ -17,11 +17,13 @@ jobs:
       run: docker-compose -f ./ci/docker-compose.yml build
 
     - name: Run tests
+      run: docker-compose -f ./ci/docker-compose.yml run test
+
+    - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: allure
         path: allure-results
-      run: docker-compose -f ./ci/docker-compose.yml run test
 
 
   allure:
