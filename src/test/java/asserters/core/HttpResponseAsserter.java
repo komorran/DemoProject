@@ -1,6 +1,5 @@
 package asserters.core;
 
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import models.infrastructure.headers.Header;
@@ -21,7 +20,6 @@ public class HttpResponseAsserter<T extends HttpResponseAsserter<T, R>, R> {
     }
 
     @Step("Assert that status code is successful")
-    @Attachment(value = "response.code()")
     public T assertSuccessful() {
         assertTrue(getResponse().isSuccessful(), "Response wasn't successful, current response status code: " + response.code());
         return (T) this;

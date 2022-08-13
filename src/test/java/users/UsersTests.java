@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import users.modules.UsersTestModule;
 
 import javax.inject.Inject;
-import java.io.IOException;
 
 import static io.qameta.allure.Allure.step;
 

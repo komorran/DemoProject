@@ -8,7 +8,6 @@ import posts.modules.PostsTestModule;
 import users.UsersTestsContext;
 
 import javax.inject.Inject;
-import java.io.IOException;
 
 import static io.qameta.allure.Allure.step;
 
