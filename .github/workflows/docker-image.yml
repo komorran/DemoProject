@@ -19,9 +19,9 @@ jobs:
     - name: Run tests
       run: docker-compose -f ./ci/docker-compose.yml run test
       uses: actions/upload-artifact@v3
-        with:
-          name: allure
-          path: allure-results
+      with:
+        name: allure
+        path: allure-results
 
   allure:
     name: Generate Allure Report
