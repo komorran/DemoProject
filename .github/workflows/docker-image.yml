@@ -38,9 +38,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: allure
-      - shell: bash
-        run: |
-          value=`unzip allure.zip -d ./allure-results`      
+          path: allure-result
 
       - name: Get Allure history
         uses: actions/checkout@v3
