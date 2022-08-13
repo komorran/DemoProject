@@ -1,5 +1,6 @@
 package demo.asserters.core;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import demo.models.infrastructure.headers.Header;
@@ -21,20 +22,33 @@ public class HttpResponseAsserter<T extends HttpResponseAsserter<T, R>, R> {
 
     @Step("Assert that status code is successful")
     public T assertSuccessful() {
+        attachResponseData();
         assertTrue(getResponse().isSuccessful(), "Response wasn't successful, current response status code: " + response.code());
         return (T) this;
     }
 
     @Step("Assert that response body is not null")
     public T assertResponseBodyIsNotNull() {
+        attachResponseData();
         assertNotNull(getResponseBody());
         return (T) this;
     }
 
     @Step("Assert that response headers contain specific header")
     public T assertHeadersContain(Header expected) {
+        attachResponseData();
         var actualHeader = getResponse().headers().get(expected.getName());
         assertEquals(actualHeader, expected.getValue());
         return (T) this;
+    }
+
+    protected void attachResponseData() {
+        Allure.addAttachment("Response", String.valueOf(getResponse()));
+        attachResponseBody();
+        Allure.addAttachment("Response Headers", String.valueOf(getResponse().headers()));
+    }
+
+    protected void attachResponseBody() {
+        Allure.addAttachment("Response Body", String.valueOf(getResponseBody()));
     }
 }

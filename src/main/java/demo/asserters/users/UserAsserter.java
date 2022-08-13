@@ -16,6 +16,8 @@ public class UserAsserter extends HttpResponseAsserter<UserAsserter, User> {
 
     @Step("Assert an user")
     public UserAsserter assertUser(User expected) {
+        attachResponseBody();
+
         var user = getResponseBody();
 
         assertEquals(expected.getName(), user.getName(), "User names should be equal");
