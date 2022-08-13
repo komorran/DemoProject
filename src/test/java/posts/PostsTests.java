@@ -4,25 +4,28 @@ import abstractions.AbstractTest;
 import models.Post;
 import models.factories.UsersFactory;
 import org.junit.jupiter.api.Test;
-import posts.modules.PostsTestsModule;
-import users.UsersTestsSteps;
+import posts.modules.PostsTestModule;
+import users.UsersTestsContext;
 
 import javax.inject.Inject;
 import java.io.IOException;
 
-public class PostsTests extends AbstractTest<PostsTestsModule, PostsTestSteps> {
+public class PostsTests extends AbstractTest<PostsTestModule> {
 
     @Inject
-    private UsersTestsSteps usersTestsSteps;
+    private PostsTestContext postsTestContext;
+
+    @Inject
+    private UsersTestsContext usersTestsContext;
 
     @Override
-    protected PostsTestsModule getModule() {
-        return new PostsTestsModule();
+    protected PostsTestModule getModule() {
+        return new PostsTestModule();
     }
 
     @Test
     public void createPostTest() throws IOException {
-        var user = usersTestsSteps.postUser(UsersFactory.getUser())
+        var user = usersTestsContext.postUser(UsersFactory.getUser())
                 .getResponse()
                 .body();
 
@@ -32,14 +35,13 @@ public class PostsTests extends AbstractTest<PostsTestsModule, PostsTestSteps> {
                 .body("qqqqqqqqqq")
                 .build();
 
-        var postResponse = testSteps.createPost(post)
+        var postResponse = postsTestContext.createPost(post)
                 .assertSuccessful()
                 .assertResponseBodyIsNotNull()
                 .assertPost(post)
-                .getResponse()
-                .body();
+                .getResponseBody();
 
-        var getResponse = testSteps.getPostById(postResponse.getId())
+        var getResponse = postsTestContext.getPostById(postResponse.getId())
                 .assertSuccessful()
                 .assertResponseBodyIsNotNull()
                 .assertPost(post);

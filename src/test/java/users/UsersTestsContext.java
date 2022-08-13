@@ -1,6 +1,6 @@
 package users;
 
-import abstractions.AbstractTestSteps;
+import abstractions.AbstractTestContext;
 import api.UsersService;
 import asserters.users.UserAsserter;
 import io.qameta.allure.Step;
@@ -10,25 +10,29 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.io.IOException;
 
-public class UsersTestsSteps extends AbstractTestSteps {
+public class UsersTestsContext extends AbstractTestContext {
     private final UsersService usersService;
-    private UserAsserter userAsserter;
+    private final UserAsserter.UserAsserterBuilder userAsserterBuilder;
 
     @Inject
-    public UsersTestsSteps(UsersService usersService, UserAsserter userAsserter) {
+    public UsersTestsContext(UsersService usersService, UserAsserter.UserAsserterBuilder userAsserterBuilder) {
         this.usersService = usersService;
-        this.userAsserter = userAsserter;
+        this.userAsserterBuilder = userAsserterBuilder;
     }
 
     @Step("Get an user by ID: {id}")
     public UserAsserter getUserById(int id) throws IOException {
         var response = usersService.getUser(id).execute();
-        return userAsserter.useResponse(response);
+        return buildAsserter(response);
     }
 
     @Step("Post an user")
     public UserAsserter postUser(User user) throws IOException {
         var response = usersService.postUser(user).execute();
-        return userAsserter.useResponse(response);
+        return buildAsserter(response);
+    }
+
+    private UserAsserter buildAsserter(Response<User> response) {
+        return userAsserterBuilder.response(response).build();
     }
 }

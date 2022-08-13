@@ -3,10 +3,9 @@ package posts.modules;
 import abstractions.AbstractTestModule;
 import api.PostsService;
 import api.UsersService;
-import asserters.core.HttpResponseAsserter;
 import asserters.posts.PostsAsserter;
 
-public class PostsTestsModule extends AbstractTestModule {
+public class PostsTestModule extends AbstractTestModule {
     @Override
     protected void configure() {
         var postsService = retrofit.create(PostsService.class);
@@ -14,6 +13,6 @@ public class PostsTestsModule extends AbstractTestModule {
 
         bind(PostsService.class).toInstance(postsService);
         bind(UsersService.class).toInstance(usersService);
-        bind(HttpResponseAsserter.class).to(PostsAsserter.class);
+        bind(PostsAsserter.PostsAsserterBuilder.class).toInstance(PostsAsserter.builder());
     }
 }

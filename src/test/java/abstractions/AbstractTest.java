@@ -5,15 +5,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 
-import javax.inject.Inject;
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public abstract class AbstractTest<T extends AbstractTestModule, M extends AbstractTestSteps> {
+public abstract class AbstractTest<T extends AbstractTestModule> {
 
     private T testModule;
-
-    @Inject
-    protected M testSteps;
 
     protected abstract T getModule();
 
