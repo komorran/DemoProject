@@ -34,7 +34,7 @@ public class PostsTests extends AbstractTest<PostsTestModule> {
         var postResponse = step("Create the post", () -> postsTestContext.createPost(post)
                 .assertSuccessful()
                 .assertResponseBodyIsNotNull()
-                .assertPost(PostsFactory.getPost(user.getId()))
+                .assertPost(post)
                 .getResponseBody());
 
         var getResponse = step("Get the post", () -> postsTestContext.getPostById(postResponse.getId())
