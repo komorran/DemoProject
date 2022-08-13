@@ -1,3 +1,3 @@
 FROM maven:3.8.6-eclipse-temurin-17
-COPY ./. /
+COPY ./. /app
 CMD mvn clean test

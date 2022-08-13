@@ -3,4 +3,4 @@ services:
   test:
     build: .
     volumes:
-      - "./allure-results:./allure-results"
+      - "./allure-results:/app/allure-results"
