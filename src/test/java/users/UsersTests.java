@@ -1,11 +1,12 @@
 package users;
 
 import abstractions.AbstractTest;
+import contexts.UsersTestsContext;
 import models.factories.UsersFactory;
 import models.infrastructure.headers.Header;
 import models.infrastructure.headers.HeaderNames;
 import org.junit.jupiter.api.Test;
-import users.modules.UsersTestModule;
+import modules.UsersTestModule;
 
 import javax.inject.Inject;
 

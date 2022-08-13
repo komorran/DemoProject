@@ -1,6 +1,5 @@
-package users;
+package contexts;
 
-import abstractions.AbstractTestContext;
 import api.UsersService;
 import asserters.users.UserAsserter;
 import io.qameta.allure.Step;
@@ -10,7 +9,7 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.io.IOException;
 
-public class UsersTestsContext extends AbstractTestContext {
+public class UsersTestsContext {
     private final UsersService usersService;
     private final UserAsserter.UserAsserterBuilder userAsserterBuilder;
 

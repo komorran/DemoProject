@@ -1,6 +1,6 @@
 package api.interceptors;
 
-import config.AppConfig;
+import models.infrastructure.config.AppConfig;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 

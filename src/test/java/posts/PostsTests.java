@@ -1,11 +1,12 @@
 package posts;
 
 import abstractions.AbstractTest;
+import contexts.PostsTestContext;
 import models.factories.PostsFactory;
 import models.factories.UsersFactory;
 import org.junit.jupiter.api.Test;
-import posts.modules.PostsTestModule;
-import users.UsersTestsContext;
+import modules.PostsTestModule;
+import contexts.UsersTestsContext;
 
 import javax.inject.Inject;
 

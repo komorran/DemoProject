@@ -1,6 +1,5 @@
-package users.modules;
+package modules;
 
-import abstractions.AbstractTestModule;
 import api.UsersService;
 import asserters.users.UserAsserter;
 

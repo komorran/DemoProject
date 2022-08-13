@@ -1,6 +1,5 @@
-package posts.modules;
+package modules;
 
-import abstractions.AbstractTestModule;
 import api.PostsService;
 import api.UsersService;
 import asserters.posts.PostsAsserter;

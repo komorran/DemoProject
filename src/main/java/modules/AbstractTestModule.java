@@ -1,8 +1,8 @@
-package abstractions;
+package modules;
 
 import api.interceptors.BearerInterceptor;
 import com.google.inject.AbstractModule;
-import config.AppConfig;
+import models.infrastructure.config.AppConfig;
 import io.qameta.allure.okhttp3.AllureOkHttp3;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

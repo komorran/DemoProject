@@ -1,6 +1,7 @@
 package abstractions;
 
 import com.google.inject.Guice;
+import modules.AbstractTestModule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;

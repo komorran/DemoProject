@@ -1,6 +1,5 @@
-package posts;
+package contexts;
 
-import abstractions.AbstractTestContext;
 import api.PostsService;
 import asserters.posts.PostsAsserter;
 import io.qameta.allure.Step;
@@ -10,7 +9,7 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.io.IOException;
 
-public class PostsTestContext extends AbstractTestContext {
+public class PostsTestContext {
     private final PostsService postsService;
     private final PostsAsserter.PostsAsserterBuilder postsAsserterBuilder;
 
