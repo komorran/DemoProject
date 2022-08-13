@@ -1,6 +1,6 @@
 package demo.posts;
 
-import demo.abstractions.AbstractTest;
+import demo.AbstractTest;
 import demo.contexts.PostsTestContext;
 import demo.models.factories.PostsFactory;
 import demo.models.factories.UsersFactory;

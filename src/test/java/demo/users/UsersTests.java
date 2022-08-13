@@ -1,6 +1,6 @@
 package demo.users;
 
-import demo.abstractions.AbstractTest;
+import demo.AbstractTest;
 import demo.contexts.UsersTestsContext;
 import demo.models.factories.UsersFactory;
 import demo.models.infrastructure.headers.Header;
