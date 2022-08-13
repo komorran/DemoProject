@@ -34,6 +34,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Download math result for job 1
+        uses: actions/download-artifact@v3
+        with:
+          name: homework
+      - shell: bash
+        run: |
+          value=`unzip allure.zip -d ./allure-results`      
+
       - name: Get Allure history
         uses: actions/checkout@v3
         if: always()
