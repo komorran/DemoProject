@@ -22,6 +22,8 @@ jobs:
   allure:
     name: Generate Allure Report
     runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs: test
     steps:
       - uses: actions/checkout@v3
 
