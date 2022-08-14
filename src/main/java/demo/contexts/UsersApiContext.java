@@ -9,12 +9,12 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.io.IOException;
 
-public class UsersTestsContext {
+public class UsersApiContext {
     private final UsersService usersService;
     private final UserAsserter.UserAsserterBuilder userAsserterBuilder;
 
     @Inject
-    public UsersTestsContext(UsersService usersService, UserAsserter.UserAsserterBuilder userAsserterBuilder) {
+    public UsersApiContext(UsersService usersService, UserAsserter.UserAsserterBuilder userAsserterBuilder) {
         this.usersService = usersService;
         this.userAsserterBuilder = userAsserterBuilder;
     }

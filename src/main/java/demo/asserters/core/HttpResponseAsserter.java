@@ -4,6 +4,7 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import demo.models.infrastructure.headers.Header;
+import okhttp3.Headers;
 import retrofit2.Response;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,6 +19,10 @@ public class HttpResponseAsserter<T extends HttpResponseAsserter<T, R>, R> {
 
     public R getResponseBody() {
         return getResponse().body();
+    }
+
+    public Headers getResponseHeaders() {
+        return getResponse().headers();
     }
 
     @Step("Assert that status code is successful")
@@ -35,17 +40,23 @@ public class HttpResponseAsserter<T extends HttpResponseAsserter<T, R>, R> {
     }
 
     @Step("Assert that response headers contain specific header")
-    public T assertHeadersContain(Header expected) {
+    public T assertHeadersContain(Header... expected) {
         attachResponseData();
-        var actualHeader = getResponse().headers().get(expected.getName());
-        assertEquals(actualHeader, expected.getValue());
+
+        for (Header expectedHeader : expected) {
+            var actualHeader = getResponseHeaders().get(expectedHeader.getName());
+
+            assertNotNull(actualHeader, "Header not found: " + expectedHeader.getName());
+            assertEquals(actualHeader, expectedHeader.getValue());
+        }
+
         return (T) this;
     }
 
     protected void attachResponseData() {
         Allure.addAttachment("Response", String.valueOf(getResponse()));
         attachResponseBody();
-        Allure.addAttachment("Response Headers", String.valueOf(getResponse().headers()));
+        Allure.addAttachment("Response Headers", String.valueOf(getResponseHeaders()));
     }
 
     protected void attachResponseBody() {

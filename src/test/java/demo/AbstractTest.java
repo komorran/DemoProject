@@ -1,7 +1,7 @@
 package demo;
 
 import com.google.inject.Guice;
-import demo.modules.AbstractTestModule;
+import demo.modules.TestModule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
@@ -10,11 +10,9 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Execution(ExecutionMode.CONCURRENT)
-public abstract class AbstractTest<T extends AbstractTestModule> {
+public abstract class AbstractTest{
 
-    private T testModule;
-
-    protected abstract T getModule();
+    private TestModule testModule;
 
     @BeforeAll
     public void configure() {
@@ -25,5 +23,10 @@ public abstract class AbstractTest<T extends AbstractTestModule> {
     public void setup() {
         Guice.createInjector(testModule)
                 .injectMembers(this);
+
     }
+
+    protected TestModule getModule() {
+        return new TestModule();
+    };
 }
