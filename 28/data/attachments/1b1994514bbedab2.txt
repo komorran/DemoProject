@@ -1,0 +1,25 @@
+date: Sun, 14 Aug 2022 14:30:12 GMT
+content-type: application/json; charset=utf-8
+location: https://gorest.co.in/public/v2/users/4335
+x-frame-options: SAMEORIGIN
+x-xss-protection: 0
+x-content-type-options: nosniff
+x-download-options: noopen
+x-permitted-cross-domain-policies: none
+referrer-policy: strict-origin-when-cross-origin
+x-ratelimit-limit: 90
+x-ratelimit-remaining: 86
+x-ratelimit-reset: 1
+etag: W/"85558de7fc03de2164b7ca8a0a0eb44c"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: 142b23ce-6640-41df-9d55-8e5cecc1daf3
+x-runtime: 0.021874
+strict-transport-security: max-age=63072000; includeSubDomains
+vary: Origin
+cf-cache-status: DYNAMIC
+expect-ct: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+report-to: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=jVp3RgW3MhqP2mtwinQglz5eWF5d1%2FV%2BTpQQvK%2FlPI0RJF31H7pqs3snvR60HMxn2kVAqyCVjCfEwCIDN48zP3vHhUFT0lM1jl67YA%2ByeMMhcGXwJMEvkbs4C7mdw5I%3D"}],"group":"cf-nel","max_age":604800}
+nel: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+server: cloudflare
+cf-ray: 73aa630ffe516ff8-IAD
+alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400

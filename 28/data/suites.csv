@@ -1,0 +1,3 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sun Aug 14 14:30:09 GMT 2022","Sun Aug 14 14:30:12 GMT 2022","2426","","demo.users.UsersTests","","demo.users.UsersTests","postUserTest","postUserTest()",""
+"passed","Sun Aug 14 14:30:09 GMT 2022","Sun Aug 14 14:30:12 GMT 2022","2740","","demo.posts.PostsTests","","demo.posts.PostsTests","createPostTest","createPostTest()",""
